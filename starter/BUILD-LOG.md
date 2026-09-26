@@ -34,6 +34,20 @@ What did the starting line actually look like, and which failure surprised you?_
 _What did you expect each failure mode to look like before you ran it? Which one behaved
 differently from your expectation, and what did that tell you?_
 
+**Date:** 2026-09-26
+
+**Implemented:** Added `verifyAccessToken()` in `server/auth.js` using Node.js `crypto`. The
+function verifies the HS256 signature using `timingSafeEqual` and validates the required JWT claims.
+
+**Observed:** The initial test command failed with `MODULE_NOT_FOUND` because I ran it from
+`D:\Rhinostream` instead of the starter project directory.
+
+**Changed:** Switched to the `starter` directory and reran `node scripts/check-jwt.js`.
+All public JWT tests passed.
+
+**Learned:** Test execution depends on the working directory. A passing JWT test suite does not
+guarantee that all hidden security edge cases are covered.
+
 ## Phase 2 — caller context and the resolution engine
 
 _This is where most people's first model is wrong. Write down the model you started with, the

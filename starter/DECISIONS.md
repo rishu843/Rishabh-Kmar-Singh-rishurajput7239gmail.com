@@ -47,6 +47,31 @@ same reason.
 refusal. I could not construct one, which is itself evidence for X.
 
 _Shows what you believed, what disproved it, and what you did next._
+  
+  ### Decision 1 — Verify JWT signatures using a fixed algorithm
+
+**What I chose:**
+
+I used the existing Node.js `crypto` implementation to verify JWT signatures using HMAC-SHA256.
+I explicitly validate the JWT header and compare signatures with `timingSafeEqual`.
+
+**Why:**
+
+The starter already signs tokens using HS256. I implemented verification using the same algorithm
+and signing input. After running `node scripts/check-jwt.js` from the project directory, all public
+JWT tests passed.
+
+**What I rejected:**
+
+I rejected selecting the verification algorithm directly from the JWT header. The header is supplied
+by the client and must not determine which algorithm the server trusts. I also rejected ordinary
+string comparison for signatures.
+
+**What would change my mind:**
+
+If the application required multiple trusted signing algorithms or asymmetric signing, I would
+consider a maintained JWT library with an explicit algorithm allowlist.
+
 
 ---
 
